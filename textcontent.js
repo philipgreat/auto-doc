@@ -13,15 +13,12 @@ const puppeteer = require('puppeteer');
 })
 
   await page.goto('https://demo.doublechaintech.com/admin/freshchain/',{ waitUntil: 'networkidle0'});
-  await page.screenshot({path: '/var/www/html/upload/login-page.png'});
-  await page.type('#username', 'SU000001');
-  await page.type('#password', 'admin123');
-
-  await page.click('button[type=submit');
-
-  await page.waitForNavigation({waitUntil: 'networkidle0'});
-  await page.screenshot({path: '/var/www/html/upload/home.png'});
-
+  
+  await page.waitForSelector('body')
+  let element = await page.$('body')
+  let value = await page.evaluate(el => el.innerHTML, element)
+  console.log(value)
+	
   await browser.close();
 })();
 

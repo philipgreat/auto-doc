@@ -12,14 +12,15 @@ const puppeteer = require('puppeteer');
     height: 720 
 })
 
-  await page.goto('https://demo.doublechaintech.com/admin/freshchain/',{ waitUntil: 'networkidle0'});
+  await page.goto('https://www.baidu.com/',{ waitUntil: 'networkidle0'});
   await page.screenshot({path: '/var/www/html/upload/login-page.png'});
-  await page.type('#username', 'SU000001');
-  await page.type('#password', 'admin123');
+  await page.type('.s_ipt', 'SU000001');
+  await page.type('.s_ipt', '\n');
 
-  await page.click('button[type=submit');
 
-  await page.waitForNavigation({waitUntil: 'networkidle0'});
+  await page.screenshot({path: '/var/www/html/upload/home00.png'});
+  await page.click('.s_btn');
+  await page.waitForSelector('body', {visible: true})
   await page.screenshot({path: '/var/www/html/upload/home.png'});
 
   await browser.close();
