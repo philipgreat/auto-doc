@@ -3,8 +3,10 @@ const puppeteer = require('puppeteer');
 (async () => {
   //const browser = await puppeteer.launch();
   
-  const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://localhost:3000' });	
-  //const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://192.168.50.56:3000' });	
+  //const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://localhost:3000' });	
+  const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://192.168.50.56:4000' });	
+
+  console.log("browser", browser)	
   const page = await browser.newPage();
   //await page.setDefaultNavigationTimeout(1000000);
   await page.setDefaultNavigationTimeout(0);

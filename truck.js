@@ -13,7 +13,7 @@ const puppeteer = require('puppeteer');
     height: 1080 
 })
 
-  await page.goto('https://demo.doublechaintech.com/admin/freshchain/',{ waitUntil: 'networkidle0'});
+  await page.goto('http://lab.doublechaintech.com/philipgreat/index.html',{ waitUntil: 'networkidle0'});
   await page.screenshot({path: '/var/www/html/upload/login-page.png'});
   await page.type('#username', 'SU000001');
   await page.type('#password', 'admin123');
