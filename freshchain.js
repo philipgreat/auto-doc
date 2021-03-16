@@ -1,8 +1,16 @@
 const puppeteer = require('puppeteer');
 
+
+var  args= process.argv.slice(2);
+console.log('myArgs: ', args);
+
+const endPointURL=args[0];
+
+
+
 (async () => {
   //const browser = await puppeteer.launch();
-  const url = "ws://127.0.0.1:9222/devtools/browser/8b6b5e38-0391-4ccd-9ec6-803b2003e6ef" 
+  const url = endPointURL 
   const browser = await puppeteer.connect({ browserWSEndpoint: url });	
   const page = await browser.newPage();
   //await page.setDefaultNavigationTimeout(1000000);
