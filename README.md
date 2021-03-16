@@ -1,7 +1,7 @@
 # auto-doc
 
 
-## 以debug模式启动Chrome, 在.bash_profile里面加入代码
+## Mac OS 以debug模式启动Chrome, 在.bash_profile里面加入代码
 
 ```
 function  debugchrome
