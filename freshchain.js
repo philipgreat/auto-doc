@@ -2,9 +2,8 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   //const browser = await puppeteer.launch();
-  
-  const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://localhost:3000' });	
-  //const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://192.168.50.56:3000' });	
+  const url = "ws://127.0.0.1:9222/devtools/browser/8b6b5e38-0391-4ccd-9ec6-803b2003e6ef" 
+  const browser = await puppeteer.connect({ browserWSEndpoint: url });	
   const page = await browser.newPage();
   //await page.setDefaultNavigationTimeout(1000000);
   await page.setDefaultNavigationTimeout(0);
@@ -14,24 +13,22 @@ const puppeteer = require('puppeteer');
 })
 
   await page.goto('https://demo.doublechaintech.com/admin/freshchain/',{ waitUntil: 'networkidle0'});
-  await page.screenshot({path: '/var/www/html/upload/login-page.png'});
+  await page.screenshot({path: 'login-page.png'});
   await page.type('#username', 'SU000001');
   await page.type('#password', 'admin123');
 
-  await page.screenshot({path: '/var/www/html/upload/home00.png'});
+  await page.screenshot({path: 'home00.png'});
   await page.click('button[type=submit');
 
-  await page.screenshot({path: '/var/www/html/upload/home01.png'});
+  await page.screenshot({path: 'home01.png'});
   await page.waitForSelector('body', {visible: true})
-  await page.screenshot({path: '/var/www/html/upload/home02.png'});
+  await page.screenshot({path: 'home02.png'});
   await page.hover('.icon-item-box:first-child');
   await page.waitForSelector('body', {visible: true})
-  await page.screenshot({path: '/var/www/html/upload/home03.png'});
+  await page.screenshot({path: 'home03.png'});
   await page.click('.icon-item-box:first-child');
   await page.waitForSelector('body', {visible: true})
   await page.waitForTimeout(2000);
-  await page.screenshot({path: '/var/www/html/upload/home04.png'});
-  await browser.close();
+  await page.screenshot({path: 'home04.png'});
 })();
-
 
