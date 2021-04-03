@@ -1,18 +1,26 @@
 const puppeteer = require('puppeteer');
-
+const axios = require('axios');
 
 var  args= process.argv.slice(2);
 console.log('myArgs: ', args);
 
-const endPointURL=args[0];
-
+//const endPointURL=args[0];
+//webSocketDebuggerUrl: 'ws://localhost:9222/devtools/browser/0b0ed4d7-b815-429b-8df6-6c5975df00d9'
 
 
 (async () => {
   //const browser = await puppeteer.launch();
-  const url = endPointURL 
+  
+  const response = await axios.get('http://localhost:9222/json/version')
+  console.log("data", response.data);
+  const {webSocketDebuggerUrl} = response.data 
+  webSocketDebuggerUrl
+
+  console.log("webSocketDebuggerUrl", webSocketDebuggerUrl);
+  const url = webSocketDebuggerUrl 
   const browser = await puppeteer.connect({ browserWSEndpoint: url });	
   const page = await browser.newPage();
+  await page.setViewport({ width: 1366, height: 768})
   //await page.setDefaultNavigationTimeout(1000000);
   await page.setDefaultNavigationTimeout(0);
   await page.setViewport({
