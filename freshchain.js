@@ -14,7 +14,6 @@ console.log('myArgs: ', args);
   const response = await axios.get('http://localhost:9222/json/version')
   console.log("data", response.data);
   const {webSocketDebuggerUrl} = response.data 
-  webSocketDebuggerUrl
 
   console.log("webSocketDebuggerUrl", webSocketDebuggerUrl);
   const url = webSocketDebuggerUrl 
