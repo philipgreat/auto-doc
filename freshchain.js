@@ -61,7 +61,7 @@ async function hoverShot(selector,path){
 
   clickShot('button[type=submit','login.png');
 
-
+ await page.waitForTimeout(5000); 
   // platform
   await page.goto('http://lab.doublechaintech.com/philipgreat/index.html',{ waitUntil: 'networkidle0'});
   clickShot('.icon-item-box .anticon-apartment','platform.png');
