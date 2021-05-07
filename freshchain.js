@@ -58,12 +58,11 @@ async function hoverShot(selector,path){
   await page.type('#username', 'SU000001');
   await page.type('#password', 'admin123');
   await page.screenshot({path: 'home00.png'});
-
   clickShot('button[type=submit','login.png');
+  await page.waitForTimeout(6000);
 
  await page.waitForTimeout(5000); 
   // platform
-  await page.goto('http://lab.doublechaintech.com/philipgreat/index.html',{ waitUntil: 'networkidle0'});
   clickShot('.icon-item-box .anticon-apartment','platform.png');
   await page.waitForTimeout(6000);
 
@@ -77,16 +76,16 @@ async function hoverShot(selector,path){
   await page.click('.ant-btn-primary span');
   await page.waitForTimeout(5000);
 
-  await page.type('input.ant-input-lg', '商户01');
-  await page.type('//form/div/div[3]/div/div[2]/div/span/div/div/div/ul/li/div/span/input', '农商科技(M004094)');
-  await page.screenshot({path: 'add_merchant_02.png'});
+  // await page.type('input.ant-input-lg', '商户01');
+  // await page.type('//form/div/div[3]/div/div[2]/div/span/div/div/div/ul/li/div/span/input', '农商科技(M004094)');
+  // await page.screenshot({path: 'add_merchant_02.png'});
 
-  await page.click('.ant-btn-primary span');
-  await page.waitForTimeout(2000);
+  // await page.click('.ant-btn-primary span');
+  // await page.waitForTimeout(2000);
 
-  await page.waitForSelector('.ant-result-title');
-  await page.click('.ant-btn-primary span');
-  await page.waitForTimeout(2000);
+  // await page.waitForSelector('.ant-result-title');
+  // await page.click('.ant-btn-primary span');
+  // await page.waitForTimeout(2000);
 
   // platform menu
   mulitClickShot('#submenu-vg0 .ant-menu-submenu-title','#platform-P000001-merchantList', 'platform_p01_merchantList.png');
