@@ -19,7 +19,7 @@ const axios = require('axios');
   })
 
   await page.goto('https://www.baidu.com',{ waitUntil: 'networkidle0'});
-  await page.screenshot({path: 'baidu.png'});
+  //await page.screenshot({path: 'baidu.png'});
   
   await browser.close();
 })();

@@ -31,7 +31,7 @@ async function clickShot(selector,path){
   await page.waitForSelector(selector, {visible: true})
   await page.click(selector);
   await page.waitForTimeout(2000);
-  await page.screenshot({path: path});
+  //await page.screenshot({path: path});
 }
 
 
@@ -41,7 +41,7 @@ async function mulitClickShot(parentselector,selector,path){
   await page.waitForSelector(selector, {visible: true})
   await page.click(selector);
   await page.waitForTimeout(3000);
-  await page.screenshot({path: path});
+  //await page.screenshot({path: path});
   await page.click(parentselector);
   await page.waitForTimeout(3000);
 }
@@ -50,14 +50,14 @@ async function hoverShot(selector,path){
   await page.waitForSelector(selector, {visible: true})
   await page.hover(selector);
   await page.waitForTimeout(1000);
-  await page.screenshot({path: path});
+  //await page.screenshot({path: path});
 }
 
   await page.goto('http://lab.doublechaintech.com/philipgreat/index.html',{ waitUntil: 'networkidle0'});
-  await page.screenshot({path: 'login-page.png'});
+  //await page.screenshot({path: 'login-page.png'});
   await page.type('#username', 'SU000001');
   await page.type('#password', 'admin123');
-  await page.screenshot({path: 'home00.png'});
+  //await page.screenshot({path: 'home00.png'});
   clickShot('button[type=submit','login.png');
   await page.waitForTimeout(6000);
 
@@ -71,14 +71,14 @@ async function hoverShot(selector,path){
   await page.waitForTimeout(6000);
 
   await page.type('input.ant-input-lg', '商户01');
-  await page.screenshot({path: 'add_merchant_01.png'});
+  //await page.screenshot({path: 'add_merchant_01.png'});
 
   await page.click('.ant-btn-primary span');
   await page.waitForTimeout(5000);
 
   // await page.type('input.ant-input-lg', '商户01');
   // await page.type('//form/div/div[3]/div/div[2]/div/span/div/div/div/ul/li/div/span/input', '农商科技(M004094)');
-  // await page.screenshot({path: 'add_merchant_02.png'});
+  // //await page.screenshot({path: 'add_merchant_02.png'});
 
   // await page.click('.ant-btn-primary span');
   // await page.waitForTimeout(2000);
@@ -151,11 +151,11 @@ async function hoverShot(selector,path){
   // [TODO] switch App
   // const dropdown = await page.$('.ant-dropdown-trigger .anticon-appstore');
   // await dropdown.focus();
-  // await page.screenshot({path: 'focusOn_01.png'});
+  // //await page.screenshot({path: 'focusOn_01.png'});
 
   // await page.click('.ant-dropdown-trigger .anticon-appstore');
   // await page.waitForTimeout(1000);
-  // await page.screenshot({path: 'focusOn_01.png'});
+  // //await page.screenshot({path: 'focusOn_01.png'});
 
 })();
 
