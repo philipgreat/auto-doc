@@ -7,15 +7,12 @@ console.log('myArgs: ', args);
 
 //const endPointURL=args[0];
 //webSocketDebuggerUrl: 'ws://localhost:9222/devtools/browser/0b0ed4d7-b815-429b-8df6-6c5975df00d9'
-let cssDefaultJSONText = fs.readFileSync('ggas/default-css.json');
-let cssDefaultValues = JSON.parse(cssDefaultJSONText);
+
 
 
 (async () => {
   //const browser = await puppeteer.launch();
   
-
-
   const response = await axios.get('http://localhost:9222/json/version')
   console.log("data", response.data);
   const {webSocketDebuggerUrl} = response.data 
@@ -29,9 +26,7 @@ let cssDefaultValues = JSON.parse(cssDefaultJSONText);
   //await page.setDefaultNavigationTimeout(1000000);
   await page.setDefaultNavigationTimeout(0);
 
-
-
-  var pageURL="https://www.pmdaniu.com/clouds/133784/62ddde7e8aac61d38a24bcd43d6f1aae-130884/13-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.html"
+  var pageURL="http://localhost:8080/ggas/html-tags.html"
   //var pageURL="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Multiple-column_Layout";
 
   
@@ -45,57 +40,62 @@ let cssDefaultValues = JSON.parse(cssDefaultJSONText);
 
   console.log(data);
   */
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
   //await page.screenshot({path: 'home.png'});
 
   page.on('console', consoleObj => console.log(consoleObj.text()));
   
-  await page.evaluate(({cssDefaultValues}) => {
-    const styleList=[];
+  const data = await page.evaluate(() => {
+
+    
+
+
+    const styleList={};
     const elements = document.body.getElementsByTagName("*");
+   
+    //styleList[document.body.tagName] = dumpCSSMap({element:document.body,parentElement:null});
 
-    console.log("de===>>",cssDefaultValues);
+    
 
-     [...elements].map(element => {
-      
-
-      const  dumpCSSText=({element,parentElement})=>{
-        var s = '';
-
+    [...elements].map(element => {
         
 
 
-        var elementStyle = getComputedStyle(element,false);
-        var parentElementStyle=getComputedStyle(parentElement);
-
-        for(var i = 0; i < elementStyle.length; i++){
+        const  dumpCSSMap=({element,parentElement})=>{
+            var s = {};
+    
+            var elementStyle = getComputedStyle(element,false);
+    
+    
+    
+            //console.log("id ", element.getAttribute("id"));
+            var parentElementStyle=getComputedStyle(parentElement,false);
+            for(var i = 0; i < elementStyle.length; i++){
           
-          var key = elementStyle[i];
-          var value=elementStyle.getPropertyValue(elementStyle[i]);
           
-
-          if(cssDefaultValues[element.tagName]&&cssDefaultValues[element.tagName][key]===elementStyle.getPropertyValue(elementStyle[i])){
-
-            //console.log("working  on ",element.tagName,"==",cssDefaultValues);
-
-            continue;
+              if(parentElement&&parentElementStyle.getPropertyValue&&(elementStyle.getPropertyValue(elementStyle[i]) === parentElementStyle.getPropertyValue(elementStyle[i]))){
+                //continue;
+              }
+              
+              s[elementStyle[i]]=elementStyle.getPropertyValue(elementStyle[i]);
+    
+              //s+=elementStyle[i] + ':' + elementStyle.getPropertyValue(elementStyle[i])+';';
+            }
+    
+           
+    
+          
+    
+            return s;
           }
-
-          if(parentElement&&parentElementStyle.getPropertyValue&&(elementStyle.getPropertyValue(elementStyle[i]) === parentElementStyle.getPropertyValue(elementStyle[i]))){
-            //continue;
-          }
-          
       
-          s+=key+ ':' +value+';';
-        }
+        
 
-       
+      
 
-        return s;
-      }
-      var cssExpr=dumpCSSText({element,parentElement:element.parentElement})
+      var cssMap=dumpCSSMap({element,parentElement:element.parentElement})
       //element.style=cssExpr
-      element.style=cssExpr
+      styleList[element.tagName] = cssMap
 
       //element.setAttribute("style-back",cssExpr)
       //element.style.fontSize="150px";
@@ -112,15 +112,17 @@ let cssDefaultValues = JSON.parse(cssDefaultJSONText);
       //return element+window.getComputedStyle(element).getPropertyValue("font-family");
     });
 
-    console.log("style list length==============>",styleList.length)
-  },{cssDefaultValues});
+    //console.log("style list length==============>",styleList.length)
+
+    return styleList;
+
+  });
 
 
-  let html = await page.content();
+  var cssJSON = JSON.stringify(data,null, 4)
 
-  let finalContent = html.replace("style-back=","style=").replace("id=","oldid=").replace("class=","oldclass=")
 
-  fs.writeFile('ggas/home.html', html, err => {
+  fs.writeFile('ggas/default-css.json', cssJSON, err => {
     if (err) {
       console.error(err)
       return

@@ -31,7 +31,7 @@ let cssDefaultValues = JSON.parse(cssDefaultJSONText);
 
 
 
-  var pageURL="https://www.pmdaniu.com/clouds/133784/62ddde7e8aac61d38a24bcd43d6f1aae-130884/13-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.html"
+  var pageURL="http://www.cmbchina.com/"
   //var pageURL="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Multiple-column_Layout";
 
   
@@ -120,7 +120,7 @@ let cssDefaultValues = JSON.parse(cssDefaultJSONText);
 
   let finalContent = html.replace("style-back=","style=").replace("id=","oldid=").replace("class=","oldclass=")
 
-  fs.writeFile('ggas/home.html', html, err => {
+  fs.writeFile('ggas/cmb.html', html, err => {
     if (err) {
       console.error(err)
       return
