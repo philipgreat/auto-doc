@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "axios": "^0.21.1",
-    "http": "^0.0.1-security",
-    "puppeteer": "^8.0.0",
-    "puppeteer-cli": "^1.5.1"
-  }
-}
